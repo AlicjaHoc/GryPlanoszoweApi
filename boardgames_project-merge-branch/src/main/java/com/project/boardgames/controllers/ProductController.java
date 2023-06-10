@@ -184,8 +184,8 @@ public class ProductController {
         // Retrieve the 5 most recent products
         List<Product> recentProducts = genericService.returnAllEntitiesById();
         recentProducts.sort(Comparator.comparing(Product::getCreatedAt).reversed());
-        if (recentProducts.size() > 5) {
-            recentProducts = recentProducts.subList(0, 5);
+        if (recentProducts.size() > 4) {
+            recentProducts = recentProducts.subList(0, 4);
         }
 
         RequestResponse<List<Product>> response = new RequestResponse<>(true, recentProducts, "The 5 most recent products");
