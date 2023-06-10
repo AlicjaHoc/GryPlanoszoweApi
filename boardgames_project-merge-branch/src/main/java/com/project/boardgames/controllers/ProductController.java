@@ -81,7 +81,7 @@ public class ProductController {
         String baseUrl = getBaseUrl(request);
 
         if (product.isPresent()) {
-            String imageUrl = baseUrl + "/static/images/" + product.get().getPhoto();
+            String imageUrl = baseUrl + "/images/" + product.get().getPhoto();
             product.get().setPhoto(imageUrl);
         }
 
