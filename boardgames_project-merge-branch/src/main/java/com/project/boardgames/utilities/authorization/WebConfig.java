@@ -57,7 +57,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/v1/myAccount")
                 .addPathPatterns("/api/v1/updateAccount")
                 .addPathPatterns("/api/v1/deleteAccount")
-                .addPathPatterns("/api/v1/logout");
+                .addPathPatterns("/api/v1/logout")
+                .addPathPatterns("/api/v1/isadmin");
     }
     @Bean
     public WebMvcConfigurer corsConfigurer() {

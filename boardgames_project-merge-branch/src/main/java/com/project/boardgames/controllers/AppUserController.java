@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.project.boardgames.ErrorUtilities.AppException;
 import com.project.boardgames.entities.Address;
 import com.project.boardgames.entities.AppUser;
+import com.project.boardgames.entities.Role;
 import com.project.boardgames.services.AppUserService;
 import com.project.boardgames.utilities.LoginRequestDTO;
 import com.project.boardgames.utilities.RequestResponse;
@@ -108,6 +109,16 @@ public class AppUserController {
     public ResponseEntity<RequestResponse<String>> logout(HttpServletRequest request, HttpServletResponse res) {
         RequestResponse<String> response = appUserService.logout(request, res);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/isadmin")
+    public ResponseEntity<RequestResponse<Boolean>> isAdmin(HttpServletRequest req) {
+        AppUser user = getUser(req);
+        RequestResponse<Boolean> response = null;
+        if(user.getRole() == Role.ADMIN) response = new RequestResponse<Boolean>(true, true, "The user is an admin", null);
+        else response = new RequestResponse<Boolean>(true, false, "User is not an admin", null);
+        return ResponseEntity.ok(response);
+
     }
 
 
