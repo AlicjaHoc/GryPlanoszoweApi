@@ -1,22 +1,34 @@
 package com.project.boardgames;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.project.boardgames.entities.Address;
+import com.project.boardgames.entities.AppUser;
 import com.project.boardgames.entities.Producer;
 import com.project.boardgames.entities.Product;
+import com.project.boardgames.entities.Role;
+import com.project.boardgames.repositories.AddressRepository;
+import com.project.boardgames.repositories.AppUserRepository;
 import com.project.boardgames.repositories.ProducerRepository;
 import com.project.boardgames.repositories.ProductRepository;
+import com.project.boardgames.utilities.authentication.PasswordHandler;
 
 @Component
 public class AdderToDatabase implements ApplicationRunner {
 
     @Autowired ProductRepository productRepository;
     @Autowired ProducerRepository producerRepository;
+    @Autowired AddressRepository addressRepository;
+    @Autowired AppUserRepository userRepository;
+    @Autowired PasswordHandler passwordEncoder;
+    
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -171,8 +183,14 @@ public class AdderToDatabase implements ApplicationRunner {
         
         productRepository.save(new Product("Bitwa o Tron", "Gra strategiczna, w której gracze rywalizują o władzę nad królestwem i walczą o tron.", producer1, BigDecimal.valueOf(12.50), "zdjecie.jpg"));
 
+        AppUser user1 = new AppUser("Agnieszka", "Akademicka", "akademicka@pans.pl", passwordEncoder.encrypt("password123"), Role.USER, true, new Address("Wyspiańskiego 20", "Krosno", "Podkarpackie", "38-400", "Polska"));
+        userRepository.save(user1);
+        AppUser user2 = new AppUser("Michał", "Adamczyk", "adamczyk@pans.pl", passwordEncoder.encrypt("password123"), Role.USER, true, new Address("Akademicka 50/12", "Rzeszów", "Mazowieckie", "35-112", "Polska"));
+        userRepository.save(user2);
+        AppUser user3 = new AppUser("Dominika", "Fajowska", "fajowska@pans.pl", passwordEncoder.encrypt("password123"), Role.USER, true, new Address("Michalicka 12", "Górki", "Podkarpackie", "36-100", "Polska"));
+        userRepository.save(user3);
         
-        
+
 
 
 

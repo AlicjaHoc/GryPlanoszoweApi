@@ -60,4 +60,17 @@ public class Address  extends GenericEntity  {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    public Address() {
+    }
+
+    public Address(String street, String city, String state, String zip, String country) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.country = country;
+    }
+
+    
 }
